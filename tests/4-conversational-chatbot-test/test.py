@@ -1,9 +1,12 @@
 import sqlite3
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.chains import ConversationalRetrievalChain
+import os
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_community.output_parsers.rail_parser import GuardrailsOutputParser
 from IPython.display import display
 import ipywidgets as widgets
+
+os.environ["OPENAI_API_KEY"] = "sk-proj-6TWIQvvPe16mdSOmDORcT3BlbkFJ3JJoAk5FmB6yQvHd297j"
 
 # Function to retrieve text chunks from SQLite database
 def retrieve_text_chunks_from_database():
@@ -26,7 +29,7 @@ def create_vector_database(embeddings):
 
 # Function to set up conversational retrieval chain
 def setup_conversational_retrieval_chain(vector_database):
-    return ConversationalRetrievalChain.from_retriever(vector_database)
+    return GuardrailsOutputParser.from_retriever(vector_database)
 
 # Function to handle user queries and display responses
 def handle_user_query(query, qa_chain, chat_history):
