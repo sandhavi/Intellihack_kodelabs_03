@@ -1,3 +1,0 @@
-                                                                                                |
-| Landscape/interior decoration of existing house/condominium unit                         | If reviewed forced sale value of the house/apartment is above the loan amount - 100% of cost. If not - 75% of cost or reviewed forced sale value of the house property, whichever is less. |
-| Construction of houses/ Apartments for sale                                              | Maximum 70% of the BOQ value           

@@ -1,31 +1,15 @@
-# Kodelab
-
-## Setup Virtual Environment
+# Kodelabs - IntelliHack NextGen
 
 ### Create a Virtual Environment
 
 ```bash
-# Windows/Mac
-py -m venv venv
-
-# Linux
 python3 -m venv venv
 ```
 
 ### Activate the Virtual Environment
 
 ```bash
-# Windows
-venv\Scripts\activate
-
-# Linux/Mac/Unix
 source venv/bin/activate
-```
-
-## Setup/Udate requirements.txt
-
-```bash
-pip freeze > requirements.txt
 ```
 
 ## Install Dependencies
@@ -33,3 +17,19 @@ pip freeze > requirements.txt
 ```bash
 pip install -r requirements.txt
 ```
+
+## Setup Chatbot using markdown file.
+
+Create the Chroma DB.
+
+```bash
+python3 setup.py
+```
+
+## Start Chatbot
+
+```bash
+python3 chatbot.py "I am 18 years old. Can I apply for a student loan? If so what do i need for that?"
+```
+
+Please put a OpenAI API key.
