@@ -1,4 +1,4 @@
-# Create Conversational chatbot - incomplete
+# Create Conversational chatbot - complete
 
 ## 1. Copy database
 
