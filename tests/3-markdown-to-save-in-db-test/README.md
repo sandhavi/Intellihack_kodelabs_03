@@ -13,7 +13,6 @@ cp ../2-markdown-to-proper-styling-test/llm-scenario.pdf ./data/llm-scenario.pdf
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip freeze > requirements.txt
 ```
 
 ## 3. Installation
