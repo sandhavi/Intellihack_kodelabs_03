@@ -13,6 +13,12 @@ os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 CHROMA_PATH = os.getenv("CHROMA_PATH")
 
+class TextColor:
+    YELLOW = '\033[93m'
+    GREEN = '\033[92m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+
 PROMPT_TEMPLATE = """
 Answer the question based only on the following context:
 
@@ -49,7 +55,8 @@ def main():
     response_text = model.predict(prompt)
 
     sources = [doc.metadata.get("source", None) for doc, _score in results]
-    formatted_response = f"Response: {response_text}"
+    formatted_response = f"{TextColor.YELLOW}{TextColor.BOLD}Response{TextColor.ENDC}:" \
+                      f"{TextColor.GREEN}{response_text}{TextColor.ENDC}"
     print(formatted_response)
 
 

@@ -1,5 +1,7 @@
 # Kodelabs - IntelliHack NextGen
 
+<img src="./images/prompt.png">
+
 ### Create a Virtual Environment
 
 ```bash
