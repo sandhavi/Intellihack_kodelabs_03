@@ -2,7 +2,7 @@
 
 ## 1. Copy the dataset.
 
-Copy the file from `./1-pdf-to-markdown-test` folder to `./2-markdown-to-proper-styling-test` folder
+Copy the `output.md` file from `./1-pdf-to-markdown-test` folder to `./2-markdown-to-proper-styling-test` folder
 
 ```bash
 cp ../1-pdf-to-markdown-test/output.md ./output.md

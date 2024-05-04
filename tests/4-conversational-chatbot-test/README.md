@@ -1,11 +1,11 @@
-# Markdown to save in db - complete
+# Create Conversational chatbot - incomplete
 
-## 1. Copy the dataset.
+## 1. Copy database
 
-Copy the file from `./2-markdown-to-proper-styling-test` folder to `./3-markdown-to-save-in-db` folder
+Copy the `document.db` file from `./3-markdown-to-save-in-db-test` folder to `./4-conversational-chatbot-test` folder
 
 ```bash
-cp ../2-markdown-to-proper-styling-test/output.md ./output.md
+cp ../3-markdown-to-save-in-db-test/document.db ./document.db
 ```
 
 ## 2. Setup
@@ -22,7 +22,8 @@ Download libraries
 
 ```bash
 pip install transformers
-pip install markdown2
+pip install ipython
+pip install ipywidgets
 pip install langchain
 ```
 
