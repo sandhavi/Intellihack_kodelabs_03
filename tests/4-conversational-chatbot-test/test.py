@@ -7,7 +7,7 @@ from IPython.display import display
 import ipywidgets as widgets
 # from openai import OpenAI
 
-os.environ["OPENAI_API_KEY"] = "sk-proj-6TWIQvvPe16mdSOmDORcT3BlbkFJ3JJoAk5FmB6yQvHd297j"
+os.environ["OPENAI_API_KEY"] = "sk-proj-jDy301vBJxzYMWYQY3EyT3BlbkFJpGiiAczZKloL3S9v3jfY"
 
 # Function to retrieve text chunks from SQLite database
 def retrieve_text_chunks_from_database():
