@@ -1,0 +1,3 @@
+-------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Purchase a land to construct a house later                                               | Maximum of 75% of reviewed market value or purchase price of the property, whichever is lesser                                                                                             |
+| Purc

@@ -5,6 +5,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_community.output_parsers.rail_parser import GuardrailsOutputParser
 from IPython.display import display
 import ipywidgets as widgets
+# from openai import OpenAI
 
 os.environ["OPENAI_API_KEY"] = "sk-proj-6TWIQvvPe16mdSOmDORcT3BlbkFJ3JJoAk5FmB6yQvHd297j"
 
@@ -18,9 +19,11 @@ def retrieve_text_chunks_from_database():
     return [chunk[0] for chunk in chunks]
 
 # Function to generate embeddings for text chunks using OpenAI
-def generate_embeddings(text_chunks):
+def generate_embeddings(text_chunks, model="text-embedding-3-small"):
     embeddings = OpenAIEmbeddings()
-    return [embeddings.embed(chunk) for chunk in text_chunks]
+    return [embeddings.embed_documents(chunk) for chunk in text_chunks]
+    # client = OpenAI()
+    # return client.embeddings.create(input = [text_chunks], model=model).data[0].embedding
 
 # Function to create a vector database using FAISS
 def create_vector_database(embeddings):
