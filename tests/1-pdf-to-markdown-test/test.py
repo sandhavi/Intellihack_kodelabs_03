@@ -19,5 +19,5 @@ def convert_to_markdown(pdf_path, markdown_path):
 
 if __name__ == "__main__":
     pdf_path = "llm-scenario.pdf"   #  PDF file path
-    markdown_path = "output.md" # Markdown output path
+    markdown_path = "llm-scenario.pdf" # Markdown output path
     convert_to_markdown(pdf_path, markdown_path)

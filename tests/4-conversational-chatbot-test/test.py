@@ -1,68 +1,57 @@
-import sqlite3
 import os
+from dotenv import load_dotenv
+import argparse
+from dataclasses import dataclass
+from langchain.vectorstores.chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
-from langchain_community.output_parsers.rail_parser import GuardrailsOutputParser
-from IPython.display import display
-import ipywidgets as widgets
-# from openai import OpenAI
+from langchain_openai import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
 
-os.environ["OPENAI_API_KEY"] = "sk-proj-jDy301vBJxzYMWYQY3EyT3BlbkFJpGiiAczZKloL3S9v3jfY"
+load_dotenv()
 
-# Function to retrieve text chunks from SQLite database
-def retrieve_text_chunks_from_database():
-    conn = sqlite3.connect('document.db')
-    c = conn.cursor()
-    c.execute("SELECT content FROM chunks")
-    chunks = c.fetchall()
-    conn.close()
-    return [chunk[0] for chunk in chunks]
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
-# Function to generate embeddings for text chunks using OpenAI
-def generate_embeddings(text_chunks, model="text-embedding-3-small"):
-    embeddings = OpenAIEmbeddings()
-    return [embeddings.embed_documents(chunk) for chunk in text_chunks]
-    # client = OpenAI()
-    # return client.embeddings.create(input = [text_chunks], model=model).data[0].embedding
+CHROMA_PATH = os.getenv("CHROMA_PATH")
 
-# Function to create a vector database using FAISS
-def create_vector_database(embeddings):
-    db = FAISS.from_embeddings(embeddings)
-    return db
+PROMPT_TEMPLATE = """
+Answer the question based only on the following context:
 
-# Function to set up conversational retrieval chain
-def setup_conversational_retrieval_chain(vector_database):
-    return GuardrailsOutputParser.from_retriever(vector_database)
+{context}
 
-# Function to handle user queries and display responses
-def handle_user_query(query, qa_chain, chat_history):
-    result = qa_chain({"question": query, "chat_history": chat_history})
-    chat_history.append((query, result['answer']))
-    display(widgets.HTML(f'<b>User:</b> {query}'))
-    display(widgets.HTML(f'<b><font color="blue">Chatbot:</font></b> {result["answer"]}'))
+---
 
-# Main function to run the chatbot
-def run_chatbot():
-    # Retrieve text chunks from SQLite database
-    text_chunks = retrieve_text_chunks_from_database()
+Answer the question based on the above context: {question}
+"""
 
-    # Generate embeddings for text chunks
-    embeddings = generate_embeddings(text_chunks)
 
-    # Create vector database using FAISS
-    vector_database = create_vector_database(embeddings)
+def main():
+    # Create CLI.
+    parser = argparse.ArgumentParser()
+    parser.add_argument("query_text", type=str, help="The query text.")
+    args = parser.parse_args()
+    query_text = args.query_text
 
-    # Set up conversational retrieval chain
-    qa_chain = setup_conversational_retrieval_chain(vector_database)
+    # Prepare the DB.
+    embedding_function = OpenAIEmbeddings(openai_api_key="sk-proj-jDy301vBJxzYMWYQY3EyT3BlbkFJpGiiAczZKloL3S9v3jfY")
+    db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
 
-    # Initialize chat history
-    chat_history = []
+    # Search the DB.
+    results = db.similarity_search_with_relevance_scores(query_text, k=3)
+    if len(results) == 0 or results[0][1] < 0.7:
+        print(f"Unable to find matching results.")
+        return
 
-    # Create chatbot interface using IPython widgets
-    print("Welcome to the Chatbot! Type 'exit' to stop.")
-    input_box = widgets.Text(placeholder='Please enter your question:')
-    input_box.on_submit(lambda _: handle_user_query(input_box.value, qa_chain, chat_history))
-    display(input_box)
+    context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+    prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
+    prompt = prompt_template.format(context=context_text, question=query_text)
 
-if __name__ == '__main__':
-    run_chatbot()
+    model = ChatOpenAI()
+    response_text = model.predict(prompt)
+
+    sources = [doc.metadata.get("source", None) for doc, _score in results]
+    formatted_response = f"Response: {response_text}"
+    print(formatted_response)
+
+
+if __name__ == "__main__":
+    main()

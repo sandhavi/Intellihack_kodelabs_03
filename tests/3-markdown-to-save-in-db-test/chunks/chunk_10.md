@@ -1,3 +1,0 @@
-                                            |
-| Purchase a house/ partly constructed house/condominium unit                              | Maximum of 75% of reviewed market value or purchase price of the property, whichever is lesser.                                                                                            |
-| Complete construction/renovation, extension/repair of an existing house/condominium unit | 90% of the BOQ value                                                                       

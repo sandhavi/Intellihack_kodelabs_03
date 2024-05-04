@@ -2,10 +2,10 @@
 
 ## 1. Copy the dataset.
 
-Copy the `output.md` file from `./2-markdown-to-proper-styling-test` folder to `./3-markdown-to-save-in-db-test` folder
+Copy the `llm-scenario.pdf` file from `./2-markdown-to-proper-styling-test` folder to `./3-markdown-to-save-in-db-test/data` folder
 
 ```bash
-cp ../2-markdown-to-proper-styling-test/output.md ./output.md
+cp ../2-markdown-to-proper-styling-test/llm-scenario.pdf ./data/llm-scenario.pdf
 ```
 
 ## 2. Setup
@@ -17,14 +17,6 @@ pip freeze > requirements.txt
 ```
 
 ## 3. Installation
-
-Download libraries
-
-```bash
-pip install transformers
-pip install markdown2
-pip install langchain
-```
 
 Install libraries listed in requirements
 

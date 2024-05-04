@@ -2,10 +2,10 @@
 
 ## 1. Copy database
 
-Copy the `document.db` file from `./3-markdown-to-save-in-db-test` folder to `./4-conversational-chatbot-test` folder
+Copy the `data` folder from `./3-markdown-to-save-in-db-test` folder to `./4-conversational-chatbot-test` folder
 
 ```bash
-cp ../3-markdown-to-save-in-db-test/document.db ./document.db
+cp -r ../3-markdown-to-save-in-db-test/data ./data
 ```
 
 ## 2. Setup
@@ -17,15 +17,6 @@ pip freeze > requirements.txt
 ```
 
 ## 3. Installation
-
-Download libraries
-
-```bash
-pip install transformers
-pip install ipython
-pip install ipywidgets
-pip install langchain
-```
 
 Install libraries listed in requirements
 
