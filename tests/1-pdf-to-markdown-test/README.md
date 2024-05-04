@@ -1,6 +1,6 @@
 # PDF to Markdown test - success
 
-## Setup
+## 1. Setup
 
 ```bash
 python3 -m venv venv
@@ -8,7 +8,7 @@ source venv/bin/activate
 pip freeze > requirements.txt
 ```
 
-## Installation
+## 2. Installation
 
 Download libraries
 
@@ -22,7 +22,7 @@ Install libraries listed in requirements
 pip install -r requirements.txt
 ```
 
-## Run test
+## 3. Run test
 
 ```bash
 python3 test.py
